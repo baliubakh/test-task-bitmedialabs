@@ -4,7 +4,7 @@ import { transactionsServices } from "../services";
 import { ITransaction } from "../types/transactions.types";
 
 class TransactionsController {
-  public async getTransactions(req: Request, res: Response) {
+  public async getTransactions(req: Request, _res: Response) {
     const filters = req.query;
     const { page } = req.params;
     if (page) {
@@ -13,21 +13,18 @@ class TransactionsController {
         +page
       );
       if (transactions) {
-        res.status(200).send(transactions);
-      } else {
-        res.status(404).send({ message: "Not Found" });
+        return transactions;
       }
-    } else {
-      res.status(400).send({ message: "Bad Request" });
     }
   }
 
-  public async getRecentTransaction(_req: Request, res: Response) {
+  public async getRecentTransaction(_req: Request, _res: Response) {
+    console.log("in task");
     const transactions: ITransaction[] =
       await transactionsServices.getRecentBlockTransactionsByNumber();
 
     await transactionsRepository.saveManyTransactions(transactions);
-    res.status(200).send({ transactions });
+    return { transactions };
   }
 }
 

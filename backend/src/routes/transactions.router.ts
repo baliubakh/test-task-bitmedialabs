@@ -15,6 +15,9 @@ router.get(
   errorHandler(transactionsController.getTransactions)
 );
 
-router.post("/recent", transactionsController.getRecentTransaction);
+router.post(
+  "/load/recent/",
+  errorHandler(transactionsController.getRecentTransaction)
+);
 
 export const transactionsRouter = router;

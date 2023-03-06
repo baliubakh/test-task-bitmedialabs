@@ -38,9 +38,9 @@ export const isStrNumeric = (str: string) => {
 const { API_BASE_URL } = config;
 
 export const cronJob = cron.schedule(
-  "* * */1 * *",
-  () => {
-    axios.post(`${API_BASE_URL}/api/transactions/recent`);
+  "0 0 */1 * * *",
+  async () => {
+    await axios.post(`${API_BASE_URL}/api/transactions/load/recent`);
   },
   {
     scheduled: false,
