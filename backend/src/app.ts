@@ -1,13 +1,22 @@
 import express from "express";
 import mongoose from "mongoose";
+import cors from "cors";
+import bodyParser from "body-parser";
 import { config } from "./configs";
 import { apiRouter } from "./routes/apiRouter";
+import { cronJob } from "./utils";
 
 const app = express();
 
 const { PORT, MONGO_CONNECT_URL_SERVER } = config;
 
-express.json();
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
+app.use(cors({ origin: "*", credentials: true }));
 app.use("/api", apiRouter);
 
 async function connectDB() {
@@ -24,3 +33,5 @@ connection.on("connected", () => {
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
+
+cronJob.start();
