@@ -310,6 +310,11 @@ export const PageButton = styled.button`
     color: ${themes.colors.secondary};
     background-color: ${themes.colors.blue};
   }
+
+  @media ${themes.media.maxLowScreenMobile} {
+    width: 2rem;
+    height: 2rem;
+  }
 `;
 
 export const ButtonsWrapper = styled.div`
