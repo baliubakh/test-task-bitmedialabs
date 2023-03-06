@@ -28,10 +28,10 @@ const connection = mongoose.connection;
 
 connection.on("connected", () => {
   console.log("DB connected");
+  cronJob.start();
 });
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
 
-cronJob.start();
