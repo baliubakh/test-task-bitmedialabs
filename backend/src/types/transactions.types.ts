@@ -8,6 +8,11 @@ export interface ITransaction {
   gas: number;
 }
 
+export interface ITransactionRouterResponse {
+  currentBlock: number;
+  transactions: ITransaction[];
+}
+
 export interface IGetBlockNumberResponse {
   data: {
     jsonrpc: string;

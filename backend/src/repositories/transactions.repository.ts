@@ -4,9 +4,9 @@ import { ITransaction, ITransactionRequest } from "../types/transactions.types";
 
 class TransactionsRepository {
   public async getByPageNumber(filter: ITransactionRequest, page: number) {
-    return TransactionsModel.find(filter)
+    return TransactionsModel.find({ ...filter })
       .limit(transactionsPerPage)
-      .skip(page * transactionsPerPage)
+      .skip((page - 1) * transactionsPerPage)
       .sort({ timestamp: "desc" })
       .exec();
   }

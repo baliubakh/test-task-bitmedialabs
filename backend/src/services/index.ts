@@ -20,26 +20,25 @@ class TransactionsServices {
       `${this.url}/api?module=proxy&action=eth_getBlockByNumber&tag=${num}&boolean=true&apikey=${this.api_key}`;
   }
 
-  private async getRecentBlockNumber() {
+  public async getRecentBlockNumber() {
     const response: IGetBlockNumberResponse = await axios.get(this.numUrl);
 
     return response.data.result;
   }
 
-  public async getRecentBlockTransactionsByNumber() {
-    const recenBlockNum = await this.getRecentBlockNumber();
-
-    const response = await axios.get(this.blockUrl(recenBlockNum));
+  public async getRecentBlockTransactionsByNumber(recentBlockNum: string) {
+    const response = await axios.get(this.blockUrl(recentBlockNum));
 
     const transactionsBlock: ITransactionBlockResponse = response.data.result;
 
-    return transactionsBlock.transactions.map((el) =>
+    const transactions = transactionsBlock.transactions.map((el) =>
       getFormattedData(
         el,
         transactionsBlock.gasUsed,
         transactionsBlock.timestamp
       )
     );
+    return transactions;
   }
 }
 
