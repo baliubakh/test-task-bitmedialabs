@@ -1,1 +1,1 @@
-export * from "./test-router";
+export * from "./transactions.router";
