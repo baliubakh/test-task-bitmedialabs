@@ -1,11 +1,10 @@
 import React from "react";
-import * as Styled from "../../styles/header.styled";
 
 const HeaderComponent = () => {
   return (
-    <Styled.HeaderWrapper>
-      <Styled.LogoWrapper>AppCo</Styled.LogoWrapper>
-    </Styled.HeaderWrapper>
+    <div className="header-wrapper">
+      <div className="logo-wrapper">AppCo</div>
+    </div>
   );
 };
 

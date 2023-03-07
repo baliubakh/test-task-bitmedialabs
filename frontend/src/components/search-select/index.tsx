@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useFormikContext } from "formik";
 import { searchOptionValues } from "../../constants";
-import * as Styled from "../../styles/home-page.styled";
-
 interface IOption {
   name: string;
   title: string;
@@ -36,25 +34,26 @@ const SearchSelectComponent = ({ name, setName }: ISearchSelectProps) => {
   const openClassName = isOpen ? "open" : "hidden";
 
   return (
-    <Styled.SelectWrapper>
-      <Styled.SelectHeader onClick={handleHeaderClick}>
+    <div className="select-wrapper">
+      <div className="select-header" onClick={handleHeaderClick}>
         {header}
-        <Styled.DropdownArrow className={openClassName}>
+        <div className={`dropdownArrow ${openClassName}`}>
           <span />
           <span />
-        </Styled.DropdownArrow>
-      </Styled.SelectHeader>
-      <Styled.SelectHiddenContent className={openClassName}>
+        </div>
+      </div>
+      <div className={`hidden-wrapper ${openClassName}`}>
         {searchOptionValues.map((option) => (
-          <Styled.SelectOption
+          <div
+            className="select-option"
             key={option.id}
             onClick={() => handleOptionClick(option)}
           >
             {option.title}
-          </Styled.SelectOption>
+          </div>
         ))}
-      </Styled.SelectHiddenContent>
-    </Styled.SelectWrapper>
+      </div>
+    </div>
   );
 };
 

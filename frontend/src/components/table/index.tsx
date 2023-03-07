@@ -1,6 +1,6 @@
 import React from "react";
 import { tableHeaderValues } from "../../constants";
-import * as Styled from "../../styles/home-page.styled";
+
 import { ITransaction } from "../../types";
 
 interface ITableProps {
@@ -10,48 +10,48 @@ interface ITableProps {
 
 const TableComponent = ({ data, currentBlock }: ITableProps) => {
   return (
-    <Styled.TableWrapper>
-      <Styled.TableComponentWrapper>
-        <Styled.TableHead>
-          <Styled.TableRow>
+    <div className="table-wrapper">
+      <div className="table-component-wrapper">
+        <thead>
+          <tr className="table-row">
             {tableHeaderValues.map((header, idx) => (
-              <Styled.TableHeader key={idx}>{header}</Styled.TableHeader>
+              <th className="table-header" key={idx}>
+                {header}
+              </th>
             ))}
-          </Styled.TableRow>
-        </Styled.TableHead>
-        <Styled.TableBody>
-          {data.map((transaction) => (
-            <Styled.TableRow>
-              <Styled.TableData>{transaction.blockNumber}</Styled.TableData>
-              <Styled.TableData>
-                <Styled.Link
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((transaction, idx) => (
+            <tr className="table-row" key={idx}>
+              <td className="table-data">{transaction.blockNumber}</td>
+              <td className="table-data">
+                <a
+                  className="link"
                   href={`https://etherscan.io/tx/${transaction.id}`}
                   target="_blank"
                   rel="noreferrer"
                 >
                   {transaction.id}
-                </Styled.Link>
-              </Styled.TableData>
-              <Styled.TableData>{transaction.s}</Styled.TableData>
-              <Styled.TableData>{transaction.r}</Styled.TableData>
-              <Styled.TableData>
+                </a>
+              </td>
+              <td className="table-data">{transaction.s}</td>
+              <td className="table-data">{transaction.r}</td>
+              <td className="table-data">
                 {currentBlock - transaction.blockNumber}
-              </Styled.TableData>
-              <Styled.TableData>
-                {" "}
+              </td>
+              <td className="table-data">
                 {new Date(
                   parseInt(transaction.timestamp, 16) * 1000
                 ).toLocaleDateString()}
-              </Styled.TableData>
-              <Styled.TableData>
-                {transaction.value.toFixed(10)}
-              </Styled.TableData>
-              <Styled.TableData>{transaction.gas.toFixed(10)}</Styled.TableData>
-            </Styled.TableRow>
+              </td>
+              <td className="table-data">{transaction.value.toFixed(10)}</td>
+              <td className="table-data">{transaction.gas.toFixed(10)}</td>
+            </tr>
           ))}
-        </Styled.TableBody>
-      </Styled.TableComponentWrapper>
-    </Styled.TableWrapper>
+        </tbody>
+      </div>
+    </div>
   );
 };
 
