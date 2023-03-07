@@ -1,13 +1,12 @@
 import React from "react";
-import * as Styled from "../../styles/footer.styled";
 
 const Footer = () => {
   return (
-    <Styled.FooterWrapper>
-      <Styled.FooterLogo>AppCo</Styled.FooterLogo>
-      <Styled.FooterData>All rights reserved by ThemeTags</Styled.FooterData>
-      <Styled.FooterData>Copyrights © 2023.</Styled.FooterData>
-    </Styled.FooterWrapper>
+    <footer className="footer-wrapper">
+      <span className="footer-logo">AppCo</span>
+      <span className="footer-data">All rights reserved by ThemeTags</span>
+      <span className="footer-data">Copyrights © 2023.</span>
+    </footer>
   );
 };
 

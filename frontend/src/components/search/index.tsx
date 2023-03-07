@@ -1,7 +1,6 @@
-import { Formik, Form, FormikHelpers } from "formik";
+import { Formik, Form, Field } from "formik";
 import React, { useState } from "react";
 import { searchInitialValues } from "../../constants";
-import * as Styled from "../../styles/home-page.styled";
 import { ISearchProps } from "../../types";
 import SearchSelectComponent from "../search-select";
 
@@ -12,10 +11,7 @@ interface ISearchComponent {
 const SearchComponent = ({ setFilters }: ISearchComponent) => {
   const [name, setName] = useState<string>("id");
 
-  const handleSubmit = (
-    values: ISearchProps,
-    { resetForm }: FormikHelpers<ISearchProps>
-  ) => {
+  const handleSubmit = (values: ISearchProps) => {
     const result = `?${Object.entries(values)
       .map((el) => (el[1] && `${el[0]}=${el[1]}`) || "")
       .join("")}`;
@@ -23,20 +19,28 @@ const SearchComponent = ({ setFilters }: ISearchComponent) => {
   };
 
   return (
-    <Styled.SearchWrapper>
+    <div className="search-wrapper">
       <Formik initialValues={searchInitialValues} onSubmit={handleSubmit}>
         <Form>
-          <Styled.SearchBox>
-            <Styled.SearchInput name={name} placeholder="Search..." />
-            <Styled.Separator />
+          <div className="search-box">
+            <Field
+              className="search-input"
+              name={name}
+              placeholder="Search..."
+            />
+            <div className="separator" />
             <SearchSelectComponent name={name} setName={setName} />
-            <Styled.SearchIconWrapper type="submit">
-              <Styled.SearchIcon src="/images/search.svg" alt="search icon" />
-            </Styled.SearchIconWrapper>
-          </Styled.SearchBox>
+            <button className="search-icon-wrapper" type="submit">
+              <img
+                className="search-icon"
+                src="/images/search.svg"
+                alt="search icon"
+              />
+            </button>
+          </div>
         </Form>
       </Formik>
-    </Styled.SearchWrapper>
+    </div>
   );
 };
 

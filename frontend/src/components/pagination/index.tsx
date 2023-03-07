@@ -1,7 +1,6 @@
 import React from "react";
 import PaginationArrow from "../../common/arrow";
 import { amoutOfPages } from "../../constants";
-import * as Styled from "../../styles/home-page.styled";
 
 interface IPaginationProps {
   page: number;
@@ -19,31 +18,35 @@ const Pagination = ({
   handleLeftArrowClick,
 }: IPaginationProps) => {
   return (
-    <Styled.PaginationWrapper>
-      <Styled.LeftArrowWrapper
-        className={page - 1 <= 0 ? "disabled" : "active"}
+    <div className="pagination-wrapper">
+      <div
+        className={`left-arrow-wrapper ${
+          page - 1 <= 0 ? "disabled" : "active"
+        }`}
         onClick={handleLeftArrowClick}
       >
         <PaginationArrow />
-      </Styled.LeftArrowWrapper>
-      <Styled.ButtonsWrapper>
+      </div>
+      <div className="button-wrapper">
         {new Array(amoutOfPages).fill("_").map((_, idx) => (
-          <Styled.PageButton
-            className={startNum + idx === page ? "active" : "regular"}
+          <button
+            className={`page-button ${
+              startNum + idx === page ? "active" : "regular"
+            }`}
             key={idx}
             onClick={() => handleButtonClick(startNum + idx)}
           >
             {startNum + idx}
-          </Styled.PageButton>
+          </button>
         ))}
-      </Styled.ButtonsWrapper>
-      <Styled.RightArrowWrapper
+      </div>
+      <div
         onClick={handleRightArrowClick}
-        className={"active"}
+        className={"right-arrow-wrapper active"}
       >
         <PaginationArrow />
-      </Styled.RightArrowWrapper>
-    </Styled.PaginationWrapper>
+      </div>
+    </div>
   );
 };
 
